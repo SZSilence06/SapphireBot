@@ -15,6 +15,7 @@ examples:
 
 def start_bot():
     App.get_instance().run()
+    
 
 if __name__ == '__main__':
     if platform_util.is_win():
