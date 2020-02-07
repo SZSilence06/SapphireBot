@@ -48,7 +48,7 @@ async def do_repeat(session: NLPSession):
 
     if last_msg.user_id == user_id:
         return
-    if (last_msg.timestamp - cur_time) / timedelta(minutes=1) > 30:
+    if (cur_time - last_msg.timestamp) / timedelta(minutes=1) > 30:
         # 间隔超过30分钟的不跟读
         return 
     if cur_msg.repeat_time == 2:
