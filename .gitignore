@@ -2,4 +2,6 @@
 **/.DS_Store
 tmp
 log
+rsync.sh
+mergerules.txt
 sapphirebot/etc

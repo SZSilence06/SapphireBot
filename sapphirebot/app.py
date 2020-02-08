@@ -1,8 +1,8 @@
 # coding=utf-8
 import nonebot
 import os
-import sapphirebot.config as config
 import logging
+import importlib
 from datetime import datetime
 from sapphirebot.utils.singleton import singleton
 
@@ -28,7 +28,7 @@ class App(object):
         self.logger.addHandler(stream_handler)
 
     def run(self):
-        nonebot.init(config)
+        nonebot.init(self._get_config())
         nonebot.load_builtin_plugins()
         nonebot.load_plugins(
             os.path.join(os.path.dirname(__file__), 'plugins'),
@@ -40,3 +40,18 @@ class App(object):
 
     def get_bot(self):
         return self.bot
+
+    def _get_config(self):
+        # default config
+        config = importlib.import_module('sapphirebot.config')
+        
+        # 读取自定的配置并改写
+        try:
+            from sapphirebot.etc.conf_mode import CONFIG_MODULE
+            custom_config = importlib.import_module(CONFIG_MODULE)
+            for key, value in custom_config.__dict__.items():
+                setattr(config, key, value)
+        except ImportError:
+            pass
+        
+        return config
