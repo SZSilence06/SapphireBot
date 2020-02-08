@@ -19,6 +19,14 @@ class App(object):
         log_file = os.path.join(self.log_dir, time_now.strftime(r'%Y-%m-%d_%H%M%S.log'))
         logging.basicConfig(filename=log_file)
 
+        # configure logger
+        self.logger = logging.getLogger('SapphireBot')
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(logging.Formatter(
+            fmt='[%(asctime)s - %(name)s] %(levelname)s : %(message)s'
+        )) 
+        self.logger.addHandler(stream_handler)
+
     def run(self):
         nonebot.init(config)
         nonebot.load_builtin_plugins()
