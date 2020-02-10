@@ -1,3 +1,4 @@
+# coding=utf-8
 from nonebot import on_command, on_natural_language, permission, NLPSession, IntentCommand
 from typing import Dict
 from dataclasses import dataclass

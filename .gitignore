@@ -5,3 +5,4 @@ log
 rsync.sh
 mergerules.txt
 sapphirebot/etc
+sapphirebot/plugins/debug.py

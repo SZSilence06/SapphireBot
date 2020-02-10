@@ -1,3 +1,4 @@
+# coding=utf-8
 from nonebot import on_command, CommandSession, permission, CQHttpError
 from sapphirebot.utils.image_picker import ImagePicker
 from sapphirebot.app import App
