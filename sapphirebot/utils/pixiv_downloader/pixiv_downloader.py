@@ -100,8 +100,11 @@ class PixivDownloader(object):
                 img_name = 'pixiv_%d%s' % (id, ext)
                 full_image_name = os.path.join(self.dir, self.image_dir, img_name)
                 if os.path.exists(full_image_name):
-                    print('skip %s' % url)
-                    return DownloadResult.SKIPPED
+                    if self.is_valid_image(full_image_name):
+                        print('skip %s' % url)
+                        return DownloadResult.SKIPPED
+                    # 是损坏的图片文件
+                    os.remove(full_image_name)
                 
                 # 因为下载过程可能是多线程并发执行的，而登录只需要全局进行一次，所以用锁保护起来
                 # 判断两次是典型的单例模式的写法
